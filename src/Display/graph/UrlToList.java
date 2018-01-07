@@ -1,4 +1,4 @@
-package graph;
+package Display.graph;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

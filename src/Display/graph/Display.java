@@ -1,4 +1,4 @@
-package graph;
+package Display.graph;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,6 +11,8 @@ import org.graphstream.ui.swingViewer.Viewer;
 
 public class Display
 {
+	
+	static Graph graph = new MultiGraph("Mundo");
 	  
   public static void main(String[] args)
   {
@@ -48,11 +50,16 @@ public class Display
   
   public static void crearMundo(List<Aeropuerto> mundoA,List<Aerolinea> mundoL,List<Ruta> mundoR) {
 	
-	  Graph graph = new MultiGraph("Mundo");
-	  //Viewer viewer = graph.display();
-	  //View view = viewer.getDefaultView();
-	 // view.getCamera().setViewPercent(1);
-	 // viewer.disableAutoLayout();
+// /*
+	 Viewer viewer = graph.display();
+	 View view = viewer.getDefaultView();
+	 view.getCamera().setViewPercent(1);
+	 viewer.disableAutoLayout();
+	 
+// */
+	 
+	 
+	 
 	  //Generar nodos
 	  for (int i=0; i<mundoA.size();i++) {
 		  try{

@@ -1,4 +1,4 @@
-package graph;
+package Display.graph;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +20,12 @@ public class Consulta {
 	Scanner scan = new Scanner(System.in);
 	 Aeropuerto destino;
 	 Aeropuerto origen;
-	  Graph graph = new MultiGraph("Mundo");
+
 	  
 	  
 	public void consultaInicial (List<Aeropuerto> mundoA,List<Ruta> mundoR){
-		//Consultas
+		
+		 
 		
 
 		  System.out.println("Ingrese su pais origen: ");
@@ -46,45 +47,49 @@ public class Consulta {
 		  System.out.println(origen.getNombre() + " ---> " + destino.getNombre());
 		  trazarRuta(origen,destino,mundoA,mundoR);
 		  
-		
-		  Viewer viewer = graph.display();
-		  View view = viewer.getDefaultView();
-		  view.getCamera().setViewPercent(1);
-		  viewer.disableAutoLayout();
 
 	  }
 	  
 	private void trazarRuta(Aeropuerto origen, Aeropuerto destino, List<Aeropuerto> mundoA,List<Ruta> mundoR) {
+
 		 List<Ruta> vuelos = new ArrayList<Ruta>();
-		 for (int i=1;i<mundoR.size();i++){
+		 for (int i=0;i<mundoR.size();i++){
+
 			 if (mundoR.get(i).getIdOrigen().equals(origen.getId()) && mundoR.get(i).getIdDestino().equals(destino.getId())){ 
 				 System.out.println(mundoR.get(i).getAerolinea());
 				 vuelos.add(mundoR.get(i));
-				 Node nodeO = graph.getNode(origen.getId());
-				 Node nodeD = graph.getNode(destino.getId());
-				 graph.removeEdge(mundoR.get(i).getId());
-				 graph.addEdge(mundoR.get(i).getId(), nodeO, nodeD);
-				 graph.addAttribute("ui.stylesheet", 
-					  		"        edge { shape: L-square-line;" +
-					  		"        fill-mode: gradient-horizontal;" + 
-					  		"		 fill-color: red"+	
-					  		"		 arrow-size: 10px;}" +
-					  		
-					  		"        graph {fill-color: red;}"
-					  );
+				 Node nodeO = Display.graph.getNode(origen.getId());
+				 Node nodeD = Display.graph.getNode(destino.getId());
 				 
-//				 graph.getEdge(mundoR.get(i).getId()).changeAttribute("ui.stylesheet", 
-	//		  		"        edge { shape: L-square-line;" +
-		//	  		"        fill-mode: gradient-horizontal;" + 
-			//  		"		 fill-color: Red;"+	
-			  //		"		 arrow-size: 10px;}");
 				 
+				 for (int j = 0; j <mundoR.size(); j++){
+					 try{
+						 Display.graph.removeEdge(mundoR.get(j).getId());
+					 }catch(Exception e){};
+				 }
+				 
+				 Display.graph.addEdge(mundoR.get(i).getId(), nodeO, nodeD);
+				 Display.graph.addAttribute("ui.stylesheet", 
+									"		 node {shape: circle;" + 
+							  		"        size: 2px;" + 
+							  		"        fill-color: #26A65B;}" + 
+						
+							  		"        edge {shape: cubic-curve;" +
+							  		"        fill-mode: gradient-horizontal;" + 
+							  		"		 fill-color: yellow;"+	
+							  		"		 arrow-size: 10px;}" +
+							  		
+							  		"        graph {fill-color: #2C3E50;}"
+							  );
+				 
+			
 				
 			 }
+		
 
 		 }
 		 
-		 
+		
 		
 	}
 

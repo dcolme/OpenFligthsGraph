@@ -1,4 +1,4 @@
-package graph;
+package Display.graph;
 
 public class Aerolinea {
 	
