@@ -6,6 +6,8 @@ import java.util.List;
 import org.graphstream.algorithm.Dijkstra;
 import org.graphstream.graph.Node;
 import org.graphstream.graph.Path;
+import org.graphstream.ui.swingViewer.View;
+import org.graphstream.ui.swingViewer.Viewer;
 
 
 public class DijkstraAlgorithm {
@@ -77,6 +79,11 @@ public class DijkstraAlgorithm {
 					Display.graph.removeEdge(mundoR.get(j).getId());
 				} catch(Exception e) {};
 			}
+			
+			Viewer viewer = Display.graph.display();
+			View view = viewer.getDefaultView();
+			 //view.getCamera().setViewPercent(1.7);
+			viewer.disableAutoLayout(); 
 		}
 		
 		

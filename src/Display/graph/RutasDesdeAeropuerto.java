@@ -2,29 +2,28 @@ package Display.graph;
 
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Scanner;
+
 
 import org.graphstream.graph.*;
-import org.graphstream.ui.swingViewer.View;
 import org.graphstream.ui.swingViewer.Viewer;
 
 
 
-public class RutasDesdeAeropuerto {
 
-	Scanner scan = new Scanner(System.in);
+public class RutasDesdeAeropuerto{
+	
 	Aeropuerto seleccion;
 	
+	public RutasDesdeAeropuerto() {
+	
+	}
 
 	
-	
-	
-	public void encontrarRutas (List<Ruta> mundoR, List<Aeropuerto> mundoA){
+	public void encontrarRutas (List<Ruta> mundoR, List<Aeropuerto> mundoA, String entrada){
 		List<String> conexiones = new ArrayList<String>();
 		System.out.println("-");
-		String aeropuertoAux = scan.nextLine();
+		String aeropuertoAux = entrada;
 		String aeropuertoIngresado = '"' + aeropuertoAux + '"';
 	
 	
@@ -71,7 +70,7 @@ public class RutasDesdeAeropuerto {
 				  		
 				  		"        edge { shape: cubic-curve;" +
 				  		"        fill-mode: gradient-horizontal;" + 
-				  		"		 fill-color: rgba(250,190,88,250);"+	
+				  		"		 fill-color: rgba(210, 77, 87,250);"+	
 				  		"        z-index: 100;" + 
 				  		"		 arrow-size: 10px;}" +
 				  		
@@ -80,18 +79,10 @@ public class RutasDesdeAeropuerto {
 		}catch(Exception e){}
 		}
 		
-		Viewer viewer = Display.graph.display();
-		View view = viewer.getDefaultView();
-		 //view.getCamera().setViewPercent(1.7);
-		viewer.disableAutoLayout();  
 	
-		
-		
 	
-
 	
 	}	
-	
 }
 
 

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JFrame;
+
 import org.graphstream.algorithm.Dijkstra;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.Node;
@@ -11,7 +13,7 @@ import org.graphstream.graph.implementations.MultiGraph;
 import org.graphstream.ui.swingViewer.View;
 import org.graphstream.ui.swingViewer.Viewer;
 
-public class Consulta {
+public class Consulta extends JFrame {
 
 	public Consulta() {
 
@@ -20,21 +22,28 @@ public class Consulta {
 	Scanner scan = new Scanner(System.in);
 	Aeropuerto destino;
 	Aeropuerto origen;
-
+	 
+	public void visual (){
+		 Consulta frame = new Consulta();
+		  frame.setSize(300, 300);
+		  frame.setVisible(true);
+	}
 	  
-	public void consultarUsuario (List<Aeropuerto> mundoA,List<Ruta> mundoR){
+	public void consultarUsuario (List<Aeropuerto> mundoA,List<Ruta> mundoR, String n4Origen, String n4Destino){
 		
+		  
+		  
 		  //El usuario introduce la informacion de su viaje.
-		  System.out.println("Ingrese su pais origen: ");
-		  String paisAux = scan.nextLine();
+		
+		  String paisAux = n4Origen;
 		  String paisOrigen = '"' + paisAux + '"';
 		  System.out.println(" ");
-		  origen = dameAeropuertos(paisOrigen,mundoA);
+		  origen = dameAeropuertos(paisOrigen, mundoA);
 		  
 		  System.out.println(" ");
 		  
-		  System.out.println("Ingrese su pais destino: ");
-		  paisAux = scan.nextLine();
+		 
+		  paisAux = n4Destino;
 		  String paisDestino = '"' + paisAux + '"';
 		  System.out.println(" ");
 		  destino = dameAeropuertos(paisDestino,mundoA);
@@ -89,6 +98,8 @@ public class Consulta {
 			System.out.println("No hay ruta directa");
 			DijkstraAlgorithm dijkstra = new DijkstraAlgorithm();
 			dijkstra.shortestPath(origen, destino, mundoR);
+			
+			
 		}
 		else {
 			Viewer viewer = Display.graph.display();
@@ -101,40 +112,28 @@ public class Consulta {
 	private Aeropuerto dameAeropuertos(String paisIngresado, List<Aeropuerto> mundoA){
 		
 		  System.out.println("Aeropuertos: ");
-		  
+		  Aeropuerto elegido = null;
 		  //Llenar lista de aeropuertos del pais
-		  List<Aeropuerto> listaAeropuertosPais = new ArrayList<Aeropuerto>();
-		  for (int i=0;i<mundoA.size();i++){	
-			  if(mundoA.get(i).getPais().equals(paisIngresado)){
-				  listaAeropuertosPais.add(mundoA.get(i));
-				  System.out.println(mundoA.get(i).getNombre()+"  "+mundoA.get(i).getN4()+"  "+mundoA.get(i).getCiudad());
-			  }
-		  }
+		
 		  
 		  //Elegir aeropuerto del pais
-		  if (listaAeropuertosPais.size()>0){
-			  while (true){
-				  System.out.println(" ");
-				  System.out.println("Elige un aeropuerto (IATA) valido: [EJEMPLO " + listaAeropuertosPais.get(0).getN4() + "]");
-				  String aeropuertoAux = scan.nextLine();
-				  String aeropuerto = '"' + aeropuertoAux + '"';
+		  if (mundoA.size()>0){
+
+				  String aeropuerto = paisIngresado;
 				  
-				  for (int i=0;i<listaAeropuertosPais.size();i++){
-					  if (listaAeropuertosPais.get(i).getN4().equals(aeropuerto)){
-						  return listaAeropuertosPais.get(i);
+				  for (int i=0;i<mundoA.size();i++){
+					  try{
+					  if (mundoA.get(i).getN4().equals(aeropuerto)){
+						  elegido = mundoA.get(i);
 					  }
+				  }catch(Exception e){};
 				  }
-			  }
+			  
 		  }
 		  
-		  else {
-			  System.out.println("No hay aeropuertos disponibles para ese pais, ingrese otro pais:");
-			  String paisIngresadoAux = scan.nextLine();
-			  paisIngresado = '"' + paisIngresadoAux + '"';
-			  dameAeropuertos(paisIngresado, mundoA);
-		  }
+		 
 		  
-	  return dameAeropuertos(paisIngresado,mundoA);
+	  return elegido;
 	  }
 	  
 
