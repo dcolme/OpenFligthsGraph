@@ -41,10 +41,13 @@ public class Display
 	  crearMundo(mundoA,mundoL,mundoR);
 	  
 	  
-	  //Informacion a partir del grafo
-	  Consulta consulta = new Consulta ();
-	  consulta.consultarUsuario(mundoA,mundoR);
+	  //Informacion a partir de dos aeropuertos
+	  //Consulta consulta = new Consulta ();
+	  //consulta.consultarUsuario(mundoA,mundoR);
 	  
+	  //Informacion a partir de un aeropuerto
+	  RutasDesdeAeropuerto rutasDesdeAeropuerto = new RutasDesdeAeropuerto();
+	  rutasDesdeAeropuerto.encontrarRutas(mundoR, mundoA);	  
   }
   
   public static void mostrarTodo () {
@@ -88,6 +91,7 @@ public class Display
 		  }catch (Exception e){};
 		  
 	  }
+	  
 	  
 	  //Generar ejes
 	  for (int i=0; i<mundoR.size();i++) {
